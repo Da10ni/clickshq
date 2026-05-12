@@ -5,6 +5,9 @@ import { HeaderComponent } from '@/components/Header'
 import { FooterComponent } from '@/components/Footer'
 import { getPayloadClient } from '@/lib/payload'
 
+// Always render fresh so header/footer/CMS edits appear immediately.
+export const dynamic = 'force-dynamic'
+
 export async function generateMetadata(): Promise<Metadata> {
   const payload = await getPayloadClient()
   const settings = await payload.findGlobal({ slug: 'site-settings' })

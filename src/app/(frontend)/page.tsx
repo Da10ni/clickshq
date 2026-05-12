@@ -3,6 +3,9 @@ import { getPayloadClient } from '@/lib/payload'
 import { RenderBlocks } from '@/components/blocks/RenderBlocks'
 import { PagePlaceholder } from '@/components/PagePlaceholder'
 
+// Always fetch fresh content from the CMS so admin edits appear immediately.
+export const dynamic = 'force-dynamic'
+
 export async function generateMetadata(): Promise<Metadata> {
   const payload = await getPayloadClient()
   const page = await payload.find({

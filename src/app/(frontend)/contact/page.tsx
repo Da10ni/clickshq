@@ -3,6 +3,8 @@ import { getPayloadClient } from '@/lib/payload'
 import { RenderBlocks } from '@/components/blocks/RenderBlocks'
 import { PagePlaceholder } from '@/components/PagePlaceholder'
 
+export const dynamic = 'force-dynamic'
+
 export async function generateMetadata(): Promise<Metadata> {
   const payload = await getPayloadClient()
   const page = await payload.find({ collection: 'pages', where: { slug: { equals: 'contact' } }, limit: 1 })
