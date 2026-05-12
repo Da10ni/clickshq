@@ -3,6 +3,7 @@ import React from 'react'
 import './globals.css'
 import { HeaderComponent } from '@/components/Header'
 import { FooterComponent } from '@/components/Footer'
+import { RefreshOnSave } from '@/components/RefreshOnSave'
 import { getPayloadClient } from '@/lib/payload'
 
 // Always render fresh so header/footer/CMS edits appear immediately.
@@ -32,6 +33,7 @@ export default async function FrontendLayout({ children }: { children: React.Rea
   return (
     <html lang="en" suppressHydrationWarning>
       <body className="min-h-screen flex flex-col" suppressHydrationWarning>
+        <RefreshOnSave />
         <HeaderComponent data={header} />
         <main className="flex-1">{children}</main>
         <FooterComponent data={footer} />
