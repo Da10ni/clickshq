@@ -28,7 +28,9 @@
       "Bash(nslookup -type=SRV _mongodb._tcp.cluster0.awntnhb.mongodb.net 8.8.8.8)",
       "Bash(nslookup -type=TXT cluster0.awntnhb.mongodb.net 8.8.8.8)",
       "Bash(timeout 120 npx tsx src/seed.ts)",
-      "Bash(timeout 150 npx tsx src/seed.ts)"
+      "Bash(timeout 150 npx tsx src/seed.ts)",
+      "Bash(cmdkey /list)",
+      "Bash(grep -iA1 \"git\")"
     ],
     "additionalDirectories": [
       "c:\\c\\Users\\HP Elite Book\\Desktop\\ClicksHQ"

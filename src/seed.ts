@@ -253,7 +253,7 @@ async function seed() {
   console.log('✓ Contact page')
 
   // Privacy & Terms (simple content pages)
-  const policyContent = (heading: string) => ({
+  const policyContent = (heading: string): any => ({
     root: {
       type: 'root', format: '', indent: 0, version: 1, direction: 'ltr' as const,
       children: [
@@ -300,7 +300,7 @@ async function seed() {
       publishedAt: new Date().toISOString(),
       author: adminUser?.id,
       excerpt: 'Today we\'re excited to launch ClicksHQ — the all-in-one platform that helps modern teams plan, track, and ship work without the busywork.',
-      content: {
+      content: ({
         root: {
           type: 'root', format: '', indent: 0, version: 1, direction: 'ltr',
           children: [
@@ -312,7 +312,7 @@ async function seed() {
               children: [{ type: 'text', text: 'Real-time dashboards, workflow automation, time tracking, and 100+ integrations — all in one place. Start free, no credit card required.', format: 0, mode: 'normal', style: '', detail: 0, version: 1 }] },
           ],
         },
-      },
+      } as any),
       meta: { title: 'Introducing ClicksHQ', description: 'The all-in-one project management platform for modern teams.' },
     },
   })
