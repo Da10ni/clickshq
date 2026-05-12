@@ -23,3 +23,8 @@ next-env.d.ts
 
 # Media uploads
 /media/
+
+# Editor / tooling
+.claude/
+.vscode/
+.idea/
