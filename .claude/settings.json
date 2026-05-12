@@ -1,0 +1,37 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm --version)",
+      "Bash(npx --version)",
+      "Bash(npm init:*)",
+      "Bash(npx next:*)",
+      "Bash(grep -v \"^$\")",
+      "Bash(npx tsc:*)",
+      "Bash(npm ls:*)",
+      "Bash(npm info:*)",
+      "Bash(npm uninstall:*)",
+      "Bash(cd \"/c/Users/HP Elite Book/Desktop/ClicksHQ\" && find src -type f | sort && echo \"---FILES COUNT---\" && find src -type f | wc -l)",
+      "Read(//c/c/Users/HP Elite Book/Desktop/ClicksHQ/**)",
+      "Bash(cd \"/c/Users/HP Elite Book/Desktop/ClicksHQ\" && rm -rf .next node_modules package-lock.json 2>/dev/null && echo \"cleaned, installing...\")",
+      "Bash(npx payload *)",
+      "Bash(grep -v \"^\\\\s*}$\")",
+      "Bash(npx next *)",
+      "Bash(echo \"EXIT CODE: $?\")",
+      "Bash(rm -rf .next)",
+      "Bash(rm -f build.log)",
+      "Bash(tasklist)",
+      "Bash(taskkill //F //PID 3200)",
+      "Bash(taskkill //F //PID 7396)",
+      "Bash(echo \"EXIT: $?\")",
+      "Bash(ls -la build.log)",
+      "Bash(tail -50 build.log)",
+      "Bash(nslookup -type=SRV _mongodb._tcp.cluster0.awntnhb.mongodb.net 8.8.8.8)",
+      "Bash(nslookup -type=TXT cluster0.awntnhb.mongodb.net 8.8.8.8)",
+      "Bash(timeout 120 npx tsx src/seed.ts)",
+      "Bash(timeout 150 npx tsx src/seed.ts)"
+    ],
+    "additionalDirectories": [
+      "c:\\c\\Users\\HP Elite Book\\Desktop\\ClicksHQ"
+    ]
+  }
+}

@@ -1,0 +1,11 @@
+// ClicksHQ — minimal Payload admin tweaks.
+// Keep this small: Payload's default admin styling is already polished.
+
+// Brand the primary action color to match the marketing site (blue-600).
+.btn--style-primary {
+  --color: #2563eb;
+
+  &:not(.btn--disabled):hover {
+    --color: #1d4ed8;
+  }
+}
