@@ -23,6 +23,16 @@ const dirname = path.dirname(filename)
 // Locally, uploads fall back to the filesystem.
 const hasBlobToken = Boolean(process.env.BLOB_READ_WRITE_TOKEN)
 
+const siteURL = process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000'
+
+// Build the public-facing URL for a given Pages/Posts document, used by Live Preview.
+const previewPath = (collection: string, slug?: string | null) => {
+  if (collection === 'posts') return slug ? `/blog/${slug}` : '/blog'
+  // pages collection
+  if (!slug || slug === 'home') return '/'
+  return `/${slug}`
+}
+
 export default buildConfig({
   admin: {
     user: Users.slug,
@@ -31,6 +41,16 @@ export default buildConfig({
     },
     meta: {
       titleSuffix: '— ClicksHQ Admin',
+    },
+    livePreview: {
+      url: ({ data, collectionConfig }) =>
+        `${siteURL}${previewPath(collectionConfig?.slug || 'pages', (data as any)?.slug)}`,
+      collections: ['pages', 'posts'],
+      breakpoints: [
+        { label: 'Mobile', name: 'mobile', width: 390, height: 844 },
+        { label: 'Tablet', name: 'tablet', width: 768, height: 1024 },
+        { label: 'Desktop', name: 'desktop', width: 1440, height: 900 },
+      ],
     },
   },
   collections: [Pages, Posts, Media, Contacts, Users],
