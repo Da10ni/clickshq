@@ -3,7 +3,7 @@
 A , fully CMS-driven marketing site for **ClicksHQ**, a -management SaaS product.
 Built with **Payload CMS v3**, **Next.js 15 (App Router)**, **TypeScript**, **Tailwind CSS**, and **MongoDB**.
 
-Everything visible on the site is editable from the Payload admin panel — there is **no hard-coded copy** on the frontend.
+Everything on the site is editable from the Payload admin panel — there is **no hard-coded copy** on the frontend.
 
 ---
 
