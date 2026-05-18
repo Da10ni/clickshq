@@ -1,4 +1,4 @@
-# ClicksHQ — SaaS Landing Page
+# ClicksHQ — SaaS  Page
 
 A , fully CMS-driven site for **ClicksHQ**, a -management SaaS product.
 Built with **Payload CMS v3**, **Next.js 15 (App Router)**, **TypeScript**, **Tailwind CSS**, and **MongoDB**.
