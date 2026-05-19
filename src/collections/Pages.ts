@@ -7,6 +7,7 @@ import { testimonialsBlock } from '../blocks/Testimonials'
 import { contentBlock } from '../blocks/Content'
 import { teamBlock } from '../blocks/Team'
 import { contactFormBlock } from '../blocks/ContactForm'
+import { homePageBlock } from '../blocks/HomePage'
 import { slugHook } from '../lib/slug'
 
 export const Pages: CollectionConfig = {
@@ -61,6 +62,10 @@ export const Pages: CollectionConfig = {
       name: 'layout',
       type: 'blocks',
       blocks: [
+        // Drop-in full home page (used by /). Add this block to the "Home" page
+        // and edit any heading, button, step, or feature in one place.
+        homePageBlock,
+        // Section-level blocks for other pages (about, contact, custom).
         heroBlock,
         featuresBlock,
         ctaBlock,

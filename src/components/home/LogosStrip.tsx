@@ -8,21 +8,14 @@ const LOGOS = [
   { src: '/images/companies/capexplan.svg', alt: 'Capexplan' },
 ]
 
-export function LogosStrip() {
+export function LogosStrip({ heading = 'Delivering consistent, high-quality solutions.' }: { heading?: string | null } = {}) {
   return (
     <section className="bg-white py-14">
       <div className="container-custom">
-        <p className="text-center text-sm text-gray-600">Delivering consistent, high-quality solutions.</p>
+        {heading && <p className="text-center text-sm text-gray-600">{heading}</p>}
         <div className="mt-8 flex flex-wrap items-center justify-center gap-x-12 gap-y-6 lg:gap-x-20">
           {LOGOS.map((l) => (
-            <Image
-              key={l.alt}
-              src={l.src}
-              alt={l.alt}
-              width={160}
-              height={48}
-              className="h-7 sm:h-8 w-auto opacity-90"
-            />
+            <Image key={l.alt} src={l.src} alt={l.alt} width={160} height={48} className="h-7 sm:h-8 w-auto opacity-90" />
           ))}
         </div>
       </div>

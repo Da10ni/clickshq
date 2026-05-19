@@ -7,8 +7,10 @@ import { TestimonialsBlock } from './TestimonialsBlock'
 import { ContentBlock } from './ContentBlock'
 import { TeamBlock } from './TeamBlock'
 import { ContactFormBlock } from './ContactFormBlock'
+import { HomePageBlock } from './HomePageBlock'
 
 const blockComponents: Record<string, React.ComponentType<{ block: any }>> = {
+  homePage: HomePageBlock,
   hero: HeroBlock,
   features: FeaturesBlock,
   cta: CTABlock,

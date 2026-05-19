@@ -3,24 +3,34 @@
 import React, { useState } from 'react'
 import Image from 'next/image'
 
-const TABS = ['Analytics', 'Task', 'Docs', 'Calendar', 'Integrations', 'AI Chat', 'Workflow']
+const DEFAULT_TABS = ['Analytics', 'Task', 'Docs', 'Calendar', 'Integrations', 'AI Chat', 'Workflow']
 
-export function ExploreTabs() {
-  const [active, setActive] = useState('Analytics')
+type Props = {
+  headingMain?: string | null
+  headingAccent?: string | null
+  tabs?: { label: string }[] | null
+}
+
+export function ExploreTabs({
+  headingMain = 'What would you like to',
+  headingAccent = 'explore?',
+  tabs,
+}: Props = {}) {
+  const tabLabels = tabs?.length ? tabs.map((t) => t.label) : DEFAULT_TABS
+  const [active, setActive] = useState(tabLabels[0])
 
   return (
     <section className="bg-white py-20 sm:py-28">
       <div className="container-custom text-center">
         <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-brand-ink">
-          What would you like to
+          {headingMain}
           <br />
-          <span className="text-brand-pink italic font-bold">explore?</span>
+          <span className="text-brand-pink italic font-bold">{headingAccent}</span>
         </h2>
 
-        {/* Tabs */}
         <div className="mt-10 overflow-x-auto">
           <div className="inline-flex items-center gap-1 sm:gap-2 border-b border-gray-200">
-            {TABS.map((t) => {
+            {tabLabels.map((t) => {
               const isActive = active === t
               return (
                 <button
@@ -41,7 +51,6 @@ export function ExploreTabs() {
           </div>
         </div>
 
-        {/* Dashboard mockup */}
         <div className="mt-12 mx-auto max-w-4xl">
           <div className="relative rounded-2xl shadow-2xl ring-1 ring-black/5 overflow-hidden bg-white">
             <Image
