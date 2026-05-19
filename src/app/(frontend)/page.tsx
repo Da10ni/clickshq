@@ -2,9 +2,12 @@ import { Metadata } from 'next'
 import { getPayloadClient } from '@/lib/payload'
 import { LivePreviewBlocks } from '@/components/LivePreviewBlocks'
 import { PagePlaceholder } from '@/components/PagePlaceholder'
+import { PageSEO } from '@/components/PageSEO'
+import { Breadcrumbs } from '@/components/Breadcrumbs'
 
-// Always fetch fresh content from the CMS so admin edits appear immediately.
 export const dynamic = 'force-dynamic'
+
+const SITE = process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000'
 
 async function getHomePage() {
   const payload = await getPayloadClient()
@@ -18,16 +21,32 @@ async function getHomePage() {
 }
 
 export async function generateMetadata(): Promise<Metadata> {
-  const data = await getHomePage()
+  const data: any = await getHomePage()
   if (!data) return {}
+  const meta = data.meta || {}
+  const ogImg = meta.image && typeof meta.image === 'object' ? meta.image.url : undefined
   return {
-    title: data.meta?.title || data.title,
-    description: data.meta?.description || undefined,
+    title: meta.title || data.title,
+    description: meta.description || undefined,
+    alternates: { canonical: meta.canonicalURL || `${SITE}/` },
+    robots: meta.noindex ? { index: false, follow: false } : undefined,
+    openGraph: {
+      title: meta.title || data.title,
+      description: meta.description || undefined,
+      url: `${SITE}/`,
+      images: ogImg ? [ogImg] : undefined,
+    },
   }
 }
 
 export default async function HomePage() {
-  const data = await getHomePage()
+  const data: any = await getHomePage()
   if (!data) return <PagePlaceholder title="Welcome to ClicksHQ" slug="home" />
-  return <LivePreviewBlocks initialData={data} />
+  return (
+    <>
+      <PageSEO doc={data} path="/" />
+      <Breadcrumbs doc={data} />
+      <LivePreviewBlocks initialData={data} />
+    </>
+  )
 }

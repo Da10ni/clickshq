@@ -99,6 +99,7 @@ async function seed() {
   await payload.create({
     collection: 'pages',
     data: {
+      _status: 'published' as any,
       title: 'Home',
       slug: 'home',
       layout: [
@@ -194,6 +195,7 @@ async function seed() {
   await payload.create({
     collection: 'pages',
     data: {
+      _status: 'published' as any,
       title: 'About',
       slug: 'about',
       layout: [
@@ -234,6 +236,7 @@ async function seed() {
   await payload.create({
     collection: 'pages',
     data: {
+      _status: 'published' as any,
       title: 'Contact',
       slug: 'contact',
       layout: [
@@ -270,6 +273,7 @@ async function seed() {
   await payload.create({
     collection: 'pages',
     data: {
+      _status: 'published' as any,
       title: 'Privacy Policy', slug: 'privacy',
       layout: [{ blockType: 'content', maxWidth: 'md', content: policyContent('Privacy Policy') }],
       meta: { title: 'Privacy Policy', description: 'ClicksHQ Privacy Policy.' },
@@ -280,6 +284,7 @@ async function seed() {
   await payload.create({
     collection: 'pages',
     data: {
+      _status: 'published' as any,
       title: 'Terms of Service', slug: 'terms',
       layout: [{ blockType: 'content', maxWidth: 'md', content: policyContent('Terms of Service') }],
       meta: { title: 'Terms of Service', description: 'ClicksHQ Terms of Service.' },
@@ -294,9 +299,9 @@ async function seed() {
   await payload.create({
     collection: 'posts',
     data: {
+      _status: 'published' as any,
       title: 'Introducing ClicksHQ: project management, reimagined',
       slug: 'introducing-clickshq',
-      status: 'published',
       publishedAt: new Date().toISOString(),
       author: adminUser?.id,
       excerpt: 'Today we\'re excited to launch ClicksHQ — the all-in-one platform that helps modern teams plan, track, and ship work without the busywork.',

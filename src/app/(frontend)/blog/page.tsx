@@ -22,7 +22,7 @@ export default async function BlogPage() {
   const payload = await getPayloadClient()
   const posts = await payload.find({
     collection: 'posts',
-    where: { status: { equals: 'published' } },
+    where: { _status: { equals: 'published' } },
     sort: '-publishedAt',
     limit: 24,
   })

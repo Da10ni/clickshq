@@ -3,6 +3,8 @@ import { mongooseAdapter } from '@payloadcms/db-mongodb'
 import { lexicalEditor } from '@payloadcms/richtext-lexical'
 import { payloadCloudPlugin } from '@payloadcms/payload-cloud'
 import { vercelBlobStorage } from '@payloadcms/storage-vercel-blob'
+import { seoPlugin } from '@payloadcms/plugin-seo'
+import { redirectsPlugin } from '@payloadcms/plugin-redirects'
 import sharp from 'sharp'
 import path from 'path'
 import { fileURLToPath } from 'url'
@@ -19,19 +21,20 @@ import { SiteSettings } from './globals/SiteSettings'
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
 
-// Vercel Blob storage activates only when the token is present (i.e. on Vercel).
-// Locally, uploads fall back to the filesystem.
 const hasBlobToken = Boolean(process.env.BLOB_READ_WRITE_TOKEN)
 
 const siteURL = process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000'
 
-// Build the public-facing URL for a given Pages/Posts document, used by Live Preview.
+// Build the public-facing URL for a given Pages/Posts document.
 const previewPath = (collection: string, slug?: string | null) => {
   if (collection === 'posts') return slug ? `/blog/${slug}` : '/blog'
-  // pages collection
   if (!slug || slug === 'home') return '/'
   return `/${slug}`
 }
+
+// Reused by SEO plugin (Generate Preview button) and Live Preview.
+const generateURL: any = ({ doc, collectionSlug }: any) =>
+  `${siteURL}${previewPath(collectionSlug || 'pages', doc?.slug)}`
 
 export default buildConfig({
   admin: {
@@ -65,9 +68,29 @@ export default buildConfig({
   }),
   sharp,
   plugins: [
-    // Safe no-op when not deployed on Payload Cloud.
     payloadCloudPlugin(),
-    // Cloud media storage on Vercel (filesystem fallback locally).
+
+    // Adds canonical URL, meta robots, OG title/desc/image, Twitter card,
+    // and a SEO preview snippet to Pages and Posts.
+    seoPlugin({
+      collections: ['pages', 'posts'],
+      uploadsCollection: 'media',
+      generateTitle: ({ doc }: any) => `${doc?.title || 'Untitled'} — ClicksHQ`,
+      generateDescription: ({ doc }: any) => doc?.excerpt || '',
+      generateURL,
+      tabbedUI: true,
+    }),
+
+    // Manages redirects (e.g. old URL → new URL, 301/302).
+    redirectsPlugin({
+      collections: ['pages', 'posts'],
+      overrides: {
+        admin: {
+          group: 'SEO',
+        },
+      },
+    }),
+
     ...(hasBlobToken
       ? [
           vercelBlobStorage({
