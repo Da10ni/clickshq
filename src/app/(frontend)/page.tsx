@@ -44,14 +44,17 @@ export async function generateMetadata(): Promise<Metadata> {
 export default async function HomePage() {
   const data: any = await getHomePage()
 
-  // No CMS doc? Render the default Figma home page (so the site is never blank).
-  if (!data) return <HomePageBlock block={{}} />
+  // We render the new Figma design no matter what.
+  // If the CMS "Home" page has a `homePage` block, its text overrides the
+  // defaults (with Live Preview). Otherwise the Figma defaults are shown.
+  const homeBlock =
+    Array.isArray(data?.layout) && data.layout.find((b: any) => b?.blockType === 'homePage')
 
-  // If the page has a layout with blocks, render them via LivePreview (updates as you type).
-  if (Array.isArray(data.layout) && data.layout.length > 0) {
-    return <LivePreviewBlocks initialData={data} />
+  if (homeBlock && data) {
+    // Pass a doc with only the homePage block so old blocks are ignored.
+    const filtered = { ...data, layout: [homeBlock] }
+    return <LivePreviewBlocks initialData={filtered} />
   }
 
-  // Fallback: defaults.
   return <HomePageBlock block={{}} />
 }
