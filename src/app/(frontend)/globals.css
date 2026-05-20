@@ -2,10 +2,21 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Inter — workhorse UI font (matches Figma typography). */
+@import url('https://rsms.me/inter/inter.css');
+
 @layer base {
   :root {
-    --color-primary: 37 99 235;
+    /* Surface tokens (CSS-vars so consumers can theme later) */
+    --bg:        #FFFFFF;
+    --fg:        #0A0A0A;
+    --muted:     #6B7280;
+    --border:    #E5E7EB;
+    --surface:   #F9FAFB;
   }
+
+  html { font-family: 'Inter var', Inter, ui-sans-serif, system-ui, sans-serif; }
+  @supports (font-variation-settings: normal) { html { font-family: 'Inter var', Inter, sans-serif; } }
 
   html {
     scroll-behavior: smooth;
@@ -15,98 +26,79 @@
   }
 
   body {
-    @apply bg-white text-gray-900 font-sans antialiased;
+    @apply bg-background text-foreground font-sans antialiased;
   }
 
-  ::selection {
-    @apply bg-brand-ink text-white;
-  }
+  ::selection { @apply bg-ink text-white; }
 
-  /* Subtle scrollbar */
-  ::-webkit-scrollbar {
-    width: 10px;
-    height: 10px;
-  }
-  ::-webkit-scrollbar-track {
-    @apply bg-gray-100;
-  }
-  ::-webkit-scrollbar-thumb {
-    @apply bg-gray-300 rounded-full;
-  }
-  ::-webkit-scrollbar-thumb:hover {
-    @apply bg-gray-400;
+  /* Scrollbar — subtle, app-grade */
+  ::-webkit-scrollbar       { width: 10px; height: 10px; }
+  ::-webkit-scrollbar-track { @apply bg-transparent; }
+  ::-webkit-scrollbar-thumb { @apply bg-gray-300 rounded-full; }
+  ::-webkit-scrollbar-thumb:hover { @apply bg-gray-400; }
+
+  /* Focus ring — accessibility default */
+  :focus-visible {
+    @apply outline-none ring-2 ring-ink/30 ring-offset-2 ring-offset-white;
   }
 }
 
 @layer components {
-  .container-custom {
-    @apply max-w-7xl mx-auto px-5 sm:px-6 lg:px-8;
+  /* Layout container */
+  .container-app {
+    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
   }
 
-  /* Primary CTA — Figma: solid black, white text. Used everywhere. */
+  /* Status pills (Active / Paused / Pending / etc.) */
+  .pill {
+    @apply inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium ring-1 ring-inset;
+  }
+  .pill-success { @apply pill bg-success-soft text-success-fg ring-success-fg/10; }
+  .pill-warning { @apply pill bg-warning-soft text-warning-fg ring-warning-fg/10; }
+  .pill-danger  { @apply pill bg-danger-soft  text-danger-fg  ring-danger-fg/10; }
+  .pill-info    { @apply pill bg-info-soft    text-info-fg    ring-info-fg/10; }
+  .pill-neutral { @apply pill bg-gray-100 text-gray-700 ring-gray-200; }
+
+  /* Card surfaces */
+  .card {
+    @apply bg-white rounded-2xl shadow-card ring-1 ring-gray-100;
+  }
+  .card-soft {
+    @apply bg-surface-alt rounded-2xl ring-1 ring-gray-100;
+  }
+
+  /* Section heading patterns */
+  .h-page  { @apply text-2xl font-bold tracking-tight text-ink; }
+  .h-card  { @apply text-lg font-semibold text-ink; }
+  .label   { @apply text-xs font-medium text-muted uppercase tracking-wide; }
+
+  /* Legacy classes — kept for the older marketing pages (about/contact etc.) */
+  .container-custom { @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8; }
+  .section-padding  { @apply py-20 sm:py-24 lg:py-28; }
   .btn-primary {
-    @apply inline-flex items-center justify-center px-6 py-3 text-sm font-semibold text-white bg-brand-ink rounded-xl
+    @apply inline-flex items-center justify-center px-6 py-3 text-sm font-semibold text-white bg-ink rounded-xl
            hover:bg-black active:bg-black transition-colors duration-200 shadow-sm;
   }
-
-  /* Secondary CTA — Figma: white with subtle border, dark text. */
   .btn-secondary {
-    @apply inline-flex items-center justify-center px-6 py-3 text-sm font-semibold text-brand-ink bg-white border border-gray-200 rounded-xl
+    @apply inline-flex items-center justify-center px-6 py-3 text-sm font-semibold text-ink bg-white border border-gray-200 rounded-xl
            hover:bg-gray-50 active:bg-gray-100 transition-colors duration-200;
   }
-
-  /* On dark backgrounds — white bg, dark text. */
   .btn-white {
-    @apply inline-flex items-center justify-center px-6 py-3 text-sm font-semibold text-brand-ink bg-white rounded-xl
+    @apply inline-flex items-center justify-center px-6 py-3 text-sm font-semibold text-ink bg-white rounded-xl
            hover:bg-gray-100 active:bg-gray-200 transition-colors duration-200 shadow-sm;
   }
-
-  .section-padding {
-    @apply py-20 sm:py-24 lg:py-28;
-  }
-
   .eyebrow {
     @apply inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-sm font-semibold
-           bg-gray-100 text-brand-ink ring-1 ring-inset ring-gray-200;
+           bg-gray-100 text-ink ring-1 ring-inset ring-gray-200;
   }
-
-  .heading-xl {
-    @apply text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-gray-900 leading-[1.1];
-  }
-
-  .heading-lg {
-    @apply text-3xl sm:text-4xl font-bold tracking-tight text-gray-900;
-  }
-
-  .text-lead {
-    @apply text-lg sm:text-xl text-gray-600 leading-relaxed;
-  }
-
-  .card-hover {
-    @apply transition-all duration-300 hover:-translate-y-1 hover:shadow-xl;
-  }
+  .heading-xl { @apply text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-gray-900 leading-[1.1]; }
+  .heading-lg { @apply text-3xl sm:text-4xl font-bold tracking-tight text-gray-900; }
+  .text-lead  { @apply text-lg sm:text-xl text-gray-600 leading-relaxed; }
+  .card-hover { @apply transition-all duration-300 hover:-translate-y-1 hover:shadow-xl; }
 }
 
 @layer utilities {
-  .text-balance {
-    text-wrap: balance;
-  }
-
-  .animate-fade-up {
-    animation: fadeUp 0.6s ease-out both;
-  }
-
-  @keyframes fadeUp {
-    from {
-      opacity: 0;
-      transform: translateY(16px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
-
+  .text-balance { text-wrap: balance; }
   .bg-grid {
     background-image:
       linear-gradient(to right, rgb(0 0 0 / 0.04) 1px, transparent 1px),
