@@ -59,7 +59,7 @@ export function ContactFormBlock({ block }: { block: any }) {
 
   const inputClass =
     'w-full px-4 py-2.5 rounded-xl border border-gray-200 bg-white text-gray-900 placeholder:text-gray-400 ' +
-    'focus:ring-2 focus:ring-primary-500/50 focus:border-primary-500 outline-none transition-all'
+    'focus:ring-2 focus:ring-brand-ink/30 focus:border-brand-ink outline-none transition-colors'
 
   return (
     <section className="section-padding bg-gradient-to-b from-gray-50 to-white">
@@ -75,13 +75,13 @@ export function ContactFormBlock({ block }: { block: any }) {
             <div className="lg:col-span-2 space-y-4">
               {items.map((item: any, i: number) => (
                 <div key={i} className="flex items-start gap-4 rounded-2xl bg-white p-5 ring-1 ring-gray-100 shadow-sm">
-                  <div className="grid h-11 w-11 flex-shrink-0 place-items-center rounded-xl bg-primary-50 text-primary-600 ring-1 ring-inset ring-primary-100">
+                  <div className="grid h-11 w-11 flex-shrink-0 place-items-center rounded-xl bg-gray-100 text-brand-ink ring-1 ring-inset ring-gray-200">
                     <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>{item.icon}</svg>
                   </div>
                   <div className="min-w-0">
                     <p className="text-sm font-semibold text-gray-900">{item.label}</p>
                     {item.href ? (
-                      <a href={item.href} className="text-sm text-primary-600 hover:underline break-words">{item.value}</a>
+                      <a href={item.href} className="text-sm text-brand-ink hover:underline break-words">{item.value}</a>
                     ) : (
                       <p className="text-sm text-gray-600 whitespace-pre-line">{item.value}</p>
                     )}

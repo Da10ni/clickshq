@@ -32,7 +32,7 @@ export function PricingBlock({ block }: { block: any }) {
               }`}
             >
               {plan.highlighted && (
-                <span className="absolute -top-3.5 left-1/2 -translate-x-1/2 px-3.5 py-1 bg-primary-600 text-white text-xs font-bold rounded-full uppercase tracking-wide shadow-lg">
+                <span className="absolute -top-3.5 left-1/2 -translate-x-1/2 px-3.5 py-1 bg-brand-ink text-white text-xs font-bold rounded-full uppercase tracking-wide shadow-lg">
                   Most Popular
                 </span>
               )}
@@ -59,10 +59,10 @@ export function PricingBlock({ block }: { block: any }) {
 
               <Link
                 href={plan.ctaUrl || '#'}
-                className={`mt-8 block text-center py-3 px-6 rounded-xl font-semibold transition-all duration-200 ${
+                className={`mt-8 block text-center py-3 px-6 rounded-xl text-sm font-semibold transition-colors duration-200 ${
                   plan.highlighted
-                    ? 'bg-white text-gray-900 hover:bg-gray-100 shadow-lg hover:-translate-y-0.5'
-                    : 'bg-primary-600 text-white hover:bg-primary-700 shadow-md shadow-primary-600/20 hover:-translate-y-0.5'
+                    ? 'bg-white text-brand-ink hover:bg-gray-100'
+                    : 'bg-brand-ink text-white hover:bg-black'
                 }`}
               >
                 {plan.ctaLabel || 'Get Started'}
@@ -72,7 +72,7 @@ export function PricingBlock({ block }: { block: any }) {
                 {plan.features?.map((f: any, j: number) => (
                   <li key={j} className="flex items-start gap-3">
                     {f.included ? (
-                      <svg className={`w-5 h-5 mt-0.5 flex-shrink-0 ${plan.highlighted ? 'text-primary-400' : 'text-primary-600'}`} fill="currentColor" viewBox="0 0 20 20">
+                      <svg className={`w-5 h-5 mt-0.5 flex-shrink-0 ${plan.highlighted ? 'text-white' : 'text-brand-ink'}`} fill="currentColor" viewBox="0 0 20 20">
                         <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z" clipRule="evenodd" />
                       </svg>
                     ) : (

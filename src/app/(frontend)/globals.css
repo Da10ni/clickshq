@@ -19,7 +19,7 @@
   }
 
   ::selection {
-    @apply bg-primary-600 text-white;
+    @apply bg-brand-ink text-white;
   }
 
   /* Subtle scrollbar */
@@ -43,20 +43,22 @@
     @apply max-w-7xl mx-auto px-5 sm:px-6 lg:px-8;
   }
 
+  /* Primary CTA — Figma: solid black, white text. Used everywhere. */
   .btn-primary {
-    @apply inline-flex items-center justify-center px-6 py-3 text-base font-semibold text-white bg-primary-600 rounded-xl
-           hover:bg-primary-700 active:bg-primary-800 transition-all duration-200
-           shadow-lg shadow-primary-600/20 hover:shadow-xl hover:shadow-primary-600/30 hover:-translate-y-0.5;
+    @apply inline-flex items-center justify-center px-6 py-3 text-sm font-semibold text-white bg-brand-ink rounded-xl
+           hover:bg-black active:bg-black transition-colors duration-200 shadow-sm;
   }
 
+  /* Secondary CTA — Figma: white with subtle border, dark text. */
   .btn-secondary {
-    @apply inline-flex items-center justify-center px-6 py-3 text-base font-semibold text-gray-700 bg-white border border-gray-200 rounded-xl
-           hover:border-gray-300 hover:bg-gray-50 active:bg-gray-100 transition-all duration-200 shadow-sm hover:shadow-md;
+    @apply inline-flex items-center justify-center px-6 py-3 text-sm font-semibold text-brand-ink bg-white border border-gray-200 rounded-xl
+           hover:bg-gray-50 active:bg-gray-100 transition-colors duration-200;
   }
 
+  /* On dark backgrounds — white bg, dark text. */
   .btn-white {
-    @apply inline-flex items-center justify-center px-6 py-3 text-base font-semibold text-gray-900 bg-white rounded-xl
-           hover:bg-gray-50 active:bg-gray-100 transition-all duration-200 shadow-lg hover:shadow-xl hover:-translate-y-0.5;
+    @apply inline-flex items-center justify-center px-6 py-3 text-sm font-semibold text-brand-ink bg-white rounded-xl
+           hover:bg-gray-100 active:bg-gray-200 transition-colors duration-200 shadow-sm;
   }
 
   .section-padding {
@@ -65,7 +67,7 @@
 
   .eyebrow {
     @apply inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-sm font-semibold
-           bg-primary-50 text-primary-700 ring-1 ring-inset ring-primary-100;
+           bg-gray-100 text-brand-ink ring-1 ring-inset ring-gray-200;
   }
 
   .heading-xl {

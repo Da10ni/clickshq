@@ -5,9 +5,9 @@ export function CTABlock({ block }: { block: any }) {
   const style = block.style || 'primary'
 
   const bgClasses: Record<string, string> = {
-    primary: 'bg-primary-600',
-    dark: 'bg-gray-900',
-    gradient: 'bg-gradient-to-br from-primary-600 via-primary-700 to-blue-700',
+    primary: 'bg-brand-ink',
+    dark: 'bg-brand-ink',
+    gradient: 'bg-gradient-to-br from-brand-ink via-gray-800 to-black',
   }
 
   return (
