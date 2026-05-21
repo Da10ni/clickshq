@@ -48,7 +48,7 @@ export default function SpacesPage() {
             <div className="mt-5 flex items-center justify-between text-xs text-muted">
               <span>{s.team}</span>
               <Link
-                href={`/app/spaces/${s.slug}`}
+                href={`/spaces/${s.slug}`}
                 className="inline-flex items-center gap-1 font-medium text-ink hover:underline"
               >
                 Open <ArrowUpRight className="h-3.5 w-3.5" />

@@ -22,26 +22,25 @@ export type NavItem = {
 }
 
 export const SIDEBAR_PRIMARY: NavItem[] = [
-  { label: 'Home',         href: '/app',              icon: Home,            match: ['/app'] },
-  { label: 'Spaces',       href: '/app/spaces',       icon: LayoutGrid,      match: ['/app/spaces'] },
-  { label: 'Teams',        href: '/app/teams',        icon: Users,           match: ['/app/teams'] },
-  { label: 'Docs',         href: '/app/docs',         icon: FileText,        match: ['/app/docs'] },
-  { label: 'Clics AI',     href: '/app/clics-ai',     icon: Sparkles,        match: ['/app/clics-ai'] },
-  { label: 'Dashboards',   href: '/app/dashboards',   icon: LayoutDashboard, match: ['/app/dashboards'] },
-  { label: 'Workflows',    href: '/app/workflows',    icon: GitBranch,       match: ['/app/workflows'] },
-  { label: 'Integrations', href: '/app/integrations', icon: Plug,            match: ['/app/integrations'] },
+  { label: 'Home',         href: '/',              icon: Home,            match: ['/'] },
+  { label: 'Spaces',       href: '/spaces',        icon: LayoutGrid,      match: ['/spaces'] },
+  { label: 'Teams',        href: '/teams',         icon: Users,           match: ['/teams'] },
+  { label: 'Docs',         href: '/docs',          icon: FileText,        match: ['/docs'] },
+  { label: 'Clics AI',     href: '/clics-ai',      icon: Sparkles,        match: ['/clics-ai'] },
+  { label: 'Dashboards',   href: '/dashboards',    icon: LayoutDashboard, match: ['/dashboards'] },
+  { label: 'Workflows',    href: '/workflows',     icon: GitBranch,       match: ['/workflows'] },
+  { label: 'Integrations', href: '/integrations',  icon: Plug,            match: ['/integrations'] },
 ]
 
 export const SIDEBAR_SECONDARY: NavItem[] = [
-  { label: 'Billing',  href: '/app/billing',  icon: CreditCard, match: ['/app/billing'] },
-  { label: 'Invite',   href: '/app/invite',   icon: UserPlus,   match: ['/app/invite'] },
-  { label: 'Settings', href: '/app/settings', icon: Settings,   match: ['/app/settings'] },
+  { label: 'Billing',  href: '/billing',  icon: CreditCard, match: ['/billing'] },
+  { label: 'Invite',   href: '/invite',   icon: UserPlus,   match: ['/invite'] },
+  { label: 'Settings', href: '/settings', icon: Settings,   match: ['/settings'] },
 ]
 
 /** Returns true if the given pathname should highlight this nav item. */
 export function isNavActive(pathname: string, item: NavItem): boolean {
+  if (item.href === '/') return pathname === '/'
   if (!item.match) return pathname === item.href
-  // "/app" must only match exactly to avoid matching every /app/* route.
-  if (item.href === '/app') return pathname === '/app'
   return item.match.some((m) => pathname === m || pathname.startsWith(m + '/'))
 }

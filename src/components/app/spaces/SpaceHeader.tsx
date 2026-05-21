@@ -23,7 +23,7 @@ export function SpaceHeader({ space }: { space: Space }) {
     <div className="space-y-4">
       {/* Breadcrumb */}
       <nav className="flex items-center gap-1.5 text-sm text-muted">
-        <Link href="/app/spaces" className="hover:text-ink transition-colors">Spaces</Link>
+        <Link href="/spaces" className="hover:text-ink transition-colors">Spaces</Link>
         <span>/</span>
         <span className="text-ink">{space.name}</span>
       </nav>

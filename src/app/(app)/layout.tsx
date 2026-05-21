@@ -1,6 +1,6 @@
 import type { Metadata } from 'next'
 import React from 'react'
-import '../(frontend)/globals.css'
+import '../globals.css'
 import { Sidebar } from '@/components/app/Sidebar'
 import { Topbar } from '@/components/app/Topbar'
 import { TooltipProvider } from '@/components/ui/Tooltip'
