@@ -84,14 +84,24 @@ export default function HomePage() {
         <div className="mt-4 grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-3">
           {SPACES.map((s) => (
             <Card key={s.id} className="p-4 group hover:shadow-md transition-shadow cursor-pointer">
-              <Image
-                src="/images/hero/recommendedSpacesblackBgBox.svg"
-                alt=""
-                aria-hidden
-                width={36}
-                height={36}
-                className="h-9 w-9"
-              />
+              <div className="relative inline-block">
+                <Image
+                  src="/images/hero/recommendedSpacesblackBgBox.svg"
+                  alt=""
+                  aria-hidden
+                  width={36}
+                  height={36}
+                  className="h-9 w-9"
+                />
+                <Image
+                  src="/images/hero/recommendedSpacesIcon.svg"
+                  alt=""
+                  aria-hidden
+                  width={18}
+                  height={18}
+                  className="h-4 w-4 absolute inset-0 m-auto"
+                />
+              </div>
               <p className="mt-3 text-sm font-semibold text-ink">{s.name}</p>
               <p className="mt-0.5 text-2xs text-muted uppercase tracking-wide">{s.category}</p>
               <p className="mt-1.5 text-xs text-muted">{s.tagline}</p>

@@ -1,35 +1,25 @@
+/**
+ * Legacy nav config — the Sidebar in src/components/app/Sidebar.tsx now owns its
+ * own NAV_ITEMS / BOTTOM_ITEMS (matched to the reference Nexus sidebar).
+ * Kept here only so any other importer doesn't break.
+ */
 import {
-  Home,
-  LayoutGrid,
-  Users,
-  FileText,
-  Sparkles,
-  LayoutDashboard,
-  GitBranch,
-  Plug,
-  CreditCard,
-  UserPlus,
-  Settings,
+  Home, LayoutGrid, Users, FileText, Sparkles, LayoutDashboard,
+  GitBranch, Plug, CreditCard, UserPlus, Settings,
   type LucideIcon,
 } from 'lucide-react'
 
-export type NavItem = {
-  label: string
-  href: string
-  icon: LucideIcon
-  /** When the current path startsWith one of these, the item is "active". */
-  match?: string[]
-}
+export type NavItem = { label: string; href: string; icon: LucideIcon; match?: string[] }
 
 export const SIDEBAR_PRIMARY: NavItem[] = [
-  { label: 'Home',         href: '/',              icon: Home,            match: ['/'] },
-  { label: 'Spaces',       href: '/spaces',        icon: LayoutGrid,      match: ['/spaces'] },
-  { label: 'Teams',        href: '/teams',         icon: Users,           match: ['/teams'] },
-  { label: 'Docs',         href: '/docs',          icon: FileText,        match: ['/docs'] },
-  { label: 'Clics AI',     href: '/clics-ai',      icon: Sparkles,        match: ['/clics-ai'] },
-  { label: 'Dashboards',   href: '/dashboards',    icon: LayoutDashboard, match: ['/dashboards'] },
-  { label: 'Workflows',    href: '/workflows',     icon: GitBranch,       match: ['/workflows'] },
-  { label: 'Integrations', href: '/integrations',  icon: Plug,            match: ['/integrations'] },
+  { label: 'Home',         href: '/',             icon: Home,            match: ['/'] },
+  { label: 'Spaces',       href: '/spaces',       icon: LayoutGrid,      match: ['/spaces'] },
+  { label: 'Teams',        href: '/teams',        icon: Users,           match: ['/teams'] },
+  { label: 'Docs',         href: '/docs',         icon: FileText,        match: ['/docs'] },
+  { label: 'Clics AI',     href: '/ask-ai',       icon: Sparkles,        match: ['/ask-ai'] },
+  { label: 'Dashboards',   href: '/leaderboard',  icon: LayoutDashboard, match: ['/leaderboard'] },
+  { label: 'Workflows',    href: '/workflows',    icon: GitBranch,       match: ['/workflows'] },
+  { label: 'Integrations', href: '/integrations', icon: Plug,            match: ['/integrations'] },
 ]
 
 export const SIDEBAR_SECONDARY: NavItem[] = [
@@ -38,7 +28,6 @@ export const SIDEBAR_SECONDARY: NavItem[] = [
   { label: 'Settings', href: '/settings', icon: Settings,   match: ['/settings'] },
 ]
 
-/** Returns true if the given pathname should highlight this nav item. */
 export function isNavActive(pathname: string, item: NavItem): boolean {
   if (item.href === '/') return pathname === '/'
   if (!item.match) return pathname === item.href
