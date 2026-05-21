@@ -1,94 +1,185 @@
 import type { Metadata } from 'next'
-import { Sparkles } from 'lucide-react'
+import Image from 'next/image'
+import { Plus, Sparkles, ChevronDown } from 'lucide-react'
 import { Button } from '@/components/ui/Button'
 import { Card } from '@/components/ui/Card'
-import { Badge } from '@/components/ui/Badge'
+import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui/Tabs'
 
 export const metadata: Metadata = { title: 'Home' }
 
-export default function AppHome() {
+const SPACES = [
+  { id: 's1', name: 'GTM Launch',     category: 'Software project', tagline: 'Popular with marketing team' },
+  { id: 's2', name: 'Product Roadmap', category: 'Product board',    tagline: 'Popular with marketing team' },
+  { id: 's3', name: 'Design System',  category: 'Design project',    tagline: 'Popular with marketing team' },
+  { id: 's4', name: 'Backend API',    category: 'Software project',  tagline: 'Popular with marketing team' },
+  { id: 's5', name: 'GTM Launch',     category: 'Software project',  tagline: 'Popular with marketing team' },
+]
+
+type TaskTab = 'assigned' | 'due' | 'overdue' | 'completed'
+
+const TASKS = {
+  assigned: [
+    { id: 't1', title: 'Jackie Kun mentioned you at', project: 'Kleon Projects', date: 'Monday, June 21 2020', badge: 'IN PROGRESS', tone: 'progress' as const },
+    { id: 't2', title: '[REMINDER] Due date of', project: 'Highspeed Studios Projects', suffix: ' te task will be coming', date: 'Monday, June 21 2020', badge: 'REVIEW', tone: 'review' as const },
+    { id: 't3', title: 'Olivia Johanna has created new task at', project: 'Kleon Projects', date: 'Monday, June 21 2020', badge: 'TO DO', tone: 'todo' as const },
+    { id: 't4', title: 'Jackie Kun mentioned you at', project: 'Kleon Projects', date: 'Monday, June 21 2020', badge: 'IN PROGRESS', tone: 'progress' as const },
+    { id: 't5', title: '[REMINDER] Due date of', project: 'Highspeed Studios Projects', suffix: ' te task will be coming', date: 'Monday, June 21 2020', badge: 'REVIEW', tone: 'review' as const },
+  ],
+  due: [],
+  overdue: [],
+  completed: [],
+}
+
+const PEOPLE = [
+  { id: 'p1', name: 'Bilal Ahmed',    initial: 'B', circle: '/images/hero/greenCircle.svg'  },
+  { id: 'p2', name: 'Sarah Chen',     initial: 'S', circle: '/images/hero/redCircle.svg'    },
+  { id: 'p3', name: 'Marcus Johnson', initial: 'M', circle: '/images/hero/yellowCircle.svg' },
+]
+
+const BADGE_TONE: Record<string, string> = {
+  progress: 'bg-rose-100 text-rose-700 ring-rose-200/60',
+  review:   'bg-amber-100 text-amber-700 ring-amber-200/60',
+  todo:     'bg-yellow-50 text-amber-700 ring-amber-200/40',
+}
+
+export default function HomePage() {
   return (
-    <div className="space-y-8">
-      <div>
-        <h1 className="text-3xl font-bold tracking-tight text-ink">Good evening, Bilal!</h1>
-        <p className="mt-1 text-sm text-muted">Welcome back to clicsHQ.</p>
+    <div className="relative">
+      {/* Decorative leaves — left side near greeting */}
+      <Image
+        src="/images/hero/leaves.svg"
+        alt=""
+        aria-hidden
+        width={220}
+        height={220}
+        className="pointer-events-none select-none absolute -top-2 left-2 opacity-90 hidden md:block"
+      />
+      {/* Decorative stars cluster — right side near greeting */}
+      <Image
+        src="/images/hero/stars.svg"
+        alt=""
+        aria-hidden
+        width={160}
+        height={160}
+        className="pointer-events-none select-none absolute -top-2 right-4 opacity-90 hidden md:block"
+      />
+
+      {/* Greeting */}
+      <div className="relative text-center pt-8 pb-10">
+        <h1 className="text-3xl sm:text-[34px] font-bold tracking-tight text-ink">Good evening, Bilal!</h1>
+        <p className="mt-1 text-sm text-muted">Welcome back to clicsHQ</p>
       </div>
 
+      {/* Recommended spaces */}
       <section>
-        <div className="flex items-end justify-between">
-          <h2 className="text-base font-semibold text-ink">Recommended spaces</h2>
+        <div className="flex flex-wrap items-center justify-between gap-3">
+          <h2 className="text-sm font-medium text-ink">Recommended spaces:</h2>
           <div className="flex items-center gap-2">
-            <Button variant="secondary" size="sm">Create member</Button>
-            <Button variant="ghost" size="sm">Recent</Button>
-            <Button variant="ghost" size="sm">View all spaces</Button>
+            <Button size="sm" className="gap-1.5"><Plus className="h-3.5 w-3.5" />Create member</Button>
+            <Button size="sm" className="gap-1.5">Recent <ChevronDown className="h-3.5 w-3.5" /></Button>
+            <button className="text-sm font-medium text-ink hover:underline">View all spaces</button>
           </div>
         </div>
 
-        <div className="mt-4 grid sm:grid-cols-2 lg:grid-cols-5 gap-4">
-          {['GTM Launch', 'Product Roadmap', 'Design System', 'Backend API', 'GTM Launch'].map((name, i) => (
-            <Card key={i} className="p-4">
-              <Badge variant="ai" size="sm" className="rounded-md">{name}</Badge>
-              <p className="mt-3 text-xs text-muted">Software project</p>
-              <p className="text-sm text-ink mt-0.5">Popular with marketing team</p>
+        <div className="mt-4 grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-3">
+          {SPACES.map((s) => (
+            <Card key={s.id} className="p-4 group hover:shadow-md transition-shadow cursor-pointer">
+              <Image
+                src="/images/hero/recommendedSpacesblackBgBox.svg"
+                alt=""
+                aria-hidden
+                width={36}
+                height={36}
+                className="h-9 w-9"
+              />
+              <p className="mt-3 text-sm font-semibold text-ink">{s.name}</p>
+              <p className="mt-0.5 text-2xs text-muted uppercase tracking-wide">{s.category}</p>
+              <p className="mt-1.5 text-xs text-muted">{s.tagline}</p>
             </Card>
+          ))}
+        </div>
+
+        {/* Pagination dots */}
+        <div className="mt-4 flex items-center justify-center gap-1.5">
+          {[0, 1, 2, 3, 4].map((i) => (
+            <span key={i} className={i === 0 ? 'h-1.5 w-4 rounded-full bg-ink' : 'h-1.5 w-1.5 rounded-full bg-gray-300'} />
           ))}
         </div>
       </section>
 
-      <section className="grid lg:grid-cols-[1fr_320px] gap-6">
-        <Card>
-          <div className="p-5 flex items-center justify-between">
-            <h2 className="h-card">My Task</h2>
-            <Button variant="ghost" size="sm">Show more</Button>
+      {/* My Task + People */}
+      <section className="mt-8 grid lg:grid-cols-[1fr_320px] gap-4">
+        {/* My Task */}
+        <Card className="p-5">
+          <div className="flex items-center justify-between">
+            <h2 className="text-base font-semibold text-ink">My Task</h2>
+            <button className="inline-flex items-center gap-1 text-sm text-muted hover:text-ink">
+              Show more
+              <Image src="/images/hero/showMore.svg" alt="" aria-hidden width={14} height={14} />
+            </button>
           </div>
-          <div className="px-5 pb-5 space-y-2.5">
-            {[
-              { txt: 'Jackie Kun mentioned you at Kleen Projects', badge: 'In Progress', variant: 'info' as const },
-              { txt: '[REMINDER] Due date of Highspeed Studios Projects is coming…', badge: 'On Hold', variant: 'warning' as const },
-              { txt: 'Olivia Johanna has created a new task at Kleen Projects', badge: 'To-Do', variant: 'neutral' as const },
-              { txt: 'Jackie Kun mentioned you at Kleen Projects', badge: 'In Progress', variant: 'info' as const },
-              { txt: '[REMINDER] Due date of Highspeed Studios Projects is coming…', badge: 'On Hold', variant: 'warning' as const },
-            ].map((t, i) => (
-              <div key={i} className="flex items-center justify-between gap-4 rounded-xl bg-surface-alt px-4 py-3">
-                <div className="flex items-center gap-3 min-w-0">
-                  <input type="checkbox" className="h-4 w-4 rounded border-gray-300" />
-                  <div className="min-w-0">
-                    <p className="text-sm text-ink truncate">{t.txt}</p>
-                    <p className="text-xs text-muted">Monday, June 21 2025</p>
+
+          <Tabs defaultValue="assigned" className="mt-4">
+            <TabsList>
+              <TabsTrigger value="assigned">Assigned to me</TabsTrigger>
+              <TabsTrigger value="due">Due soon</TabsTrigger>
+              <TabsTrigger value="overdue">Overdue</TabsTrigger>
+              <TabsTrigger value="completed">Completed</TabsTrigger>
+            </TabsList>
+
+            {(['assigned', 'due', 'overdue', 'completed'] as TaskTab[]).map((tab) => (
+              <TabsContent key={tab} value={tab}>
+                {TASKS[tab].length === 0 ? (
+                  <p className="text-sm text-muted py-8 text-center">Nothing here yet.</p>
+                ) : (
+                  <div className="space-y-2">
+                    {TASKS[tab].map((t) => (
+                      <div key={t.id} className="flex items-center justify-between gap-4 rounded-xl px-4 py-3 hover:bg-surface-alt transition-colors">
+                        <div className="flex items-center gap-3 min-w-0">
+                          <input type="checkbox" className="h-4 w-4 rounded-full border-gray-300" />
+                          <div className="min-w-0">
+                            <p className="text-sm text-ink truncate">
+                              {t.title} <span className="font-medium text-ink">{t.project}</span>{(t as any).suffix || ''}
+                            </p>
+                            <p className="text-xs text-muted mt-0.5">{t.date}</p>
+                          </div>
+                        </div>
+                        <span className={`shrink-0 inline-flex items-center px-3 py-1 rounded-full text-2xs font-semibold ring-1 ring-inset ${BADGE_TONE[t.tone]}`}>
+                          {t.badge}
+                        </span>
+                      </div>
+                    ))}
                   </div>
-                </div>
-                <Badge variant={t.variant} size="sm">{t.badge}</Badge>
-              </div>
+                )}
+              </TabsContent>
             ))}
-          </div>
+          </Tabs>
         </Card>
 
-        <Card>
-          <div className="p-5 flex items-center justify-between">
-            <h2 className="h-card">People</h2>
-            <Button variant="ghost" size="sm">View All</Button>
+        {/* People */}
+        <Card className="p-5">
+          <div className="flex items-center justify-between">
+            <h2 className="text-base font-semibold text-ink">People</h2>
+            <button className="text-sm font-medium text-muted hover:text-ink">View All</button>
           </div>
-          <div className="px-5 pb-5 space-y-3">
-            {[
-              { name: 'Mai Sasaki',     dot: 'bg-emerald-500' },
-              { name: 'Sarah Chen',     dot: 'bg-amber-500' },
-              { name: 'Marcus Johnson', dot: 'bg-rose-500' },
-            ].map((p) => (
-              <div key={p.name} className="flex items-center justify-between">
+          <ul className="mt-5 space-y-4">
+            {PEOPLE.map((p) => (
+              <li key={p.id} className="flex items-center justify-between">
                 <div className="flex items-center gap-3">
-                  <div className="grid h-8 w-8 place-items-center rounded-full bg-gray-200 text-xs font-semibold text-ink">
-                    {p.name.charAt(0)}
-                  </div>
+                  <span className="grid h-9 w-9 place-items-center rounded-full bg-gray-200 text-ink text-xs font-semibold">
+                    {p.initial}
+                  </span>
                   <p className="text-sm text-ink">{p.name}</p>
                 </div>
-                <span className={`h-2 w-2 rounded-full ${p.dot}`} />
-              </div>
+                <Image src={p.circle} alt="" aria-hidden width={12} height={12} className="h-3 w-3" />
+              </li>
             ))}
-          </div>
+          </ul>
         </Card>
       </section>
 
-      <Card className="p-5 flex items-start gap-3 bg-ai-50 ring-ai-200/50">
+      {/* Floating Clics AI suggestion — keeps the AI nudge visible */}
+      <Card className="mt-8 p-4 flex items-start gap-3 bg-ai-50 ring-ai-200/50">
         <div className="grid h-9 w-9 place-items-center rounded-lg bg-white shadow-xs text-ai-600">
           <Sparkles className="h-4 w-4" />
         </div>
