@@ -14,16 +14,15 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
     <html lang="en" suppressHydrationWarning>
       <body className="bg-background text-foreground antialiased" suppressHydrationWarning>
         <TooltipProvider delayDuration={150}>
-          <div className="flex min-h-screen bg-sidebar">
+          {/* Match reference layout: flex row, sidebar at left, scrollable main content */}
+          <div className="h-screen bg-gray-50 flex overflow-hidden">
             <Sidebar />
-
-            {/* Main content surface — white card with rounded corners on the outside */}
-            <div className="flex-1 flex flex-col bg-white rounded-l-3xl overflow-hidden">
+            <main className="flex-1 flex flex-col overflow-hidden bg-white">
               <Topbar />
-              <main className="flex-1 overflow-y-auto">
+              <div className="flex-1 overflow-y-auto">
                 <div className="px-4 sm:px-6 lg:px-8 py-6">{children}</div>
-              </main>
-            </div>
+              </div>
+            </main>
           </div>
         </TooltipProvider>
       </body>

@@ -2,7 +2,7 @@
   "name": "clickshq",
   "version": "1.0.0",
   "private": true,
-  "description": "ClicksHQ — Project Management Platform Landing Page",
+  "description": "ClicksHQ \u2014 Project Management Platform Landing Page",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
@@ -35,10 +35,10 @@
     "@radix-ui/react-tabs": "^1.1.13",
     "@radix-ui/react-tooltip": "^1.2.8",
     "@tailwindcss/typography": "^0.5.19",
+    "@tanstack/react-query": "^5.100.11",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "date-fns": "^4.2.1",
-    "dotenv": "^17.4.2",
     "graphql": "^16.8.1",
     "lucide-react": "^1.16.0",
     "next": "^15.4.11",
@@ -49,7 +49,8 @@
     "sharp": "^0.33.0",
     "tailwind-merge": "^3.6.0",
     "tailwindcss-animate": "^1.0.7",
-    "zod": "^4.4.3"
+    "zod": "^4.4.3",
+    "zustand": "^5.0.13"
   },
   "devDependencies": {
     "@types/node": "^22.0.0",
