@@ -4,9 +4,9 @@
   "private": true,
   "description": "ClicksHQ \u2014 Project Management Platform Landing Page",
   "scripts": {
-    "dev": "node api.js && next dev",
+    "dev": "next dev",
     "build": "next build",
-    "start": "node api.js && next start",
+    "start": "next start",
     "generate:types": "payload generate:types",
     "generate:importmap": "payload generate:importmap",
     "payload": "payload",
